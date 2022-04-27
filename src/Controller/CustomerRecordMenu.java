@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Customer;
+import Model.SavedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,22 +36,28 @@ public class CustomerRecordMenu implements Initializable {
     private Button CustomerRecordMenuModCustomerBtn;
 
     @FXML
-    private TableView<?> CustomerRecordMenuTbl;
+    private TableView<Customer> CustomerRecordMenuTbl;
 
     @FXML
-    private TableColumn<?, ?> CustomerRecordMenuTblAddressCol;
+    private TableColumn<Customer, String> CustomerRecordMenuTblAddressCol;
 
     @FXML
-    private TableColumn<?, ?> CustomerRecordMenuTblCountryCol;
+    private TableColumn<Customer, Integer> CustomerRecordMenuTblCountryCol;
 
     @FXML
-    private TableColumn<?, ?> CustomerRecordMenuTblCustomerIDCol;
+    private TableColumn<Customer, Integer> CustomerRecordMenuTblCustomerIDCol;
 
     @FXML
-    private TableColumn<?, ?> CustomerRecordMenuTblCustomerNameCol;
+    private TableColumn<Customer, String> CustomerRecordMenuTblCustomerNameCol;
 
     @FXML
-    private TableColumn<?, ?> CustomerRecordsMenuTblPostalCodeCol;
+    private TableColumn<Customer, String> CustomerRecordsMenuTblPostalCodeCol;
+
+    @FXML
+    private TableColumn<Customer, String> CustomerRecordsMenuTblPhoneCol;
+
+    @FXML
+    private TableColumn<Customer, Integer> CustomerRecordMenuTblStateCol;
 
     @FXML
     void OnActionDeleteCustomer(ActionEvent event) {
@@ -82,6 +91,16 @@ public class CustomerRecordMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        CustomerRecordMenuTbl.setItems(SavedData.getAllCustomers());
+
+        CustomerRecordMenuTblCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        CustomerRecordMenuTblCustomerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        CustomerRecordMenuTblAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
+        CustomerRecordsMenuTblPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("customerZip"));
+        CustomerRecordsMenuTblPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
+//        CustomerRecordMenuTblStateCol.setCellValueFactory(new PropertyValueFactory<>("divisionID"));
+//        CustomerRecordMenuTblCountryCol.setCellValueFactory(new PropertyValueFactory<>("countryID"));
 
     }
 }

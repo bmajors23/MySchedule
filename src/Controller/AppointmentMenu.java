@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Appointment;
+import Model.SavedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,10 +34,10 @@ public class AppointmentMenu implements Initializable {
     private RadioButton ApptMenuMonthRdBtn;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTbkLocationCol;
+    private TableColumn<?, ?> ApptMenuTblLocationCol;
 
     @FXML
-    private TableView<?> ApptMenuTbl;
+    private TableView<Appointment> ApptMenuTbl;
 
     @FXML
     private TableColumn<?, ?> ApptMenuTblApptIDCol;
@@ -110,6 +113,19 @@ public class AppointmentMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        ApptMenuTbl.setItems(SavedData.getAllAppointments());
+
+        ApptMenuTblApptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        ApptMenuTblTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        ApptMenuTblDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        ApptMenuTblLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        ApptMenuTblTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        ApptMenuTblStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startDateAndTime"));
+        ApptMenuTblEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endDateAndTime"));
+        ApptMenuTblCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        ApptMenuTblUserIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        ApptMenuTblContactCol.setCellValueFactory(new PropertyValueFactory<>("contactID"));
 
     }
 }

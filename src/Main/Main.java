@@ -1,12 +1,15 @@
 package Main;
 
-import Model.Customer;
+import Helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Main extends Application {
 
@@ -37,11 +40,14 @@ public class Main extends Application {
 //    }
 
 
-
-
-
-
     public static void main(String[] args) {
+
+        JDBC.openConnection();
+
         launch(args);
+
+        JDBC.closeConnection();
+
+
     }
 }

@@ -6,25 +6,17 @@ public class Customer {
     private int customerID;
     private String customerName;
     private String customerAddress;
-    private int customerZip;
+    private String customerZip;
     private String customerPhoneNumber;
-    private Time createDate;
-    private String createdBy;
-    private Time lastUpdate;
-    private String updatedBy;
-    private int divisonID;
+    private int divisionID;
 
-    public Customer(int customerID, String customerName, String customerAddress, int customerZip, String customerPhoneNumber, Time createDate, String createdBy, Time lastUpdate, String updatedBy, int divisonID) {
+    public Customer(int customerID, String customerName, String customerAddress, String customerZip, String customerPhoneNumber, int divisionID) {
         this.customerID = customerID;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerZip = customerZip;
         this.customerPhoneNumber = customerPhoneNumber;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.updatedBy = updatedBy;
-        this.divisonID = divisonID;
+        this.divisionID = divisionID;
     }
 
     public String getCustomerName() {
@@ -43,11 +35,11 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
-    public int getCustomerZip() {
+    public String getCustomerZip() {
         return customerZip;
     }
 
-    public void setCustomerZip(int customerZip) {
+    public void setCustomerZip(String customerZip) {
         this.customerZip = customerZip;
     }
 
@@ -67,44 +59,12 @@ public class Customer {
         this.customerID = customerID;
     }
 
-    public Time getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Time createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Time getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Time lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
     public int getDivisonID() {
-        return divisonID;
+        return divisionID;
     }
 
     public void setDivisonID(int divisonID) {
-        this.divisonID = divisonID;
+        this.divisionID = divisonID;
     }
 }
 
