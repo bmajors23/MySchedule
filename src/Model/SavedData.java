@@ -75,5 +75,9 @@ public class SavedData {
     public static ObservableList<Contact> getAllContacts() {
         return allContacts;
     }
+
+    public static void addCustomer(Customer customer) {
+        getAllCustomers().add(customer);
+    }
 }
 

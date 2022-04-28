@@ -59,12 +59,12 @@ public class Customer {
         this.customerID = customerID;
     }
 
-    public int getDivisonID() {
+    public int getDivisionID() {
         return divisionID;
     }
 
-    public void setDivisonID(int divisonID) {
-        this.divisionID = divisonID;
+    public void setDivisionID(int divisionID) {
+        this.divisionID = divisionID;
     }
 }
 

@@ -99,8 +99,7 @@ public class CustomerRecordMenu implements Initializable {
         CustomerRecordMenuTblAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
         CustomerRecordsMenuTblPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("customerZip"));
         CustomerRecordsMenuTblPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
-//        CustomerRecordMenuTblStateCol.setCellValueFactory(new PropertyValueFactory<>("divisionID"));
-//        CustomerRecordMenuTblCountryCol.setCellValueFactory(new PropertyValueFactory<>("countryID"));
+        CustomerRecordMenuTblStateCol.setCellValueFactory(new PropertyValueFactory<>("divisionID"));
 
     }
 }

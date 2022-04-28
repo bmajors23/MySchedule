@@ -1,18 +1,26 @@
 package Controller;
 
+import Helper.JDBC;
+import Model.Customer;
+import Model.SavedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddCustomer implements Initializable {
@@ -61,6 +69,16 @@ public class AddCustomer implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/View/CustomerRecordMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+
+    public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(titleBar);
+        alert.setHeaderText(headerMessage);
+        alert.showAndWait();
     }
 
     @Override

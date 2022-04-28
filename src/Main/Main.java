@@ -1,5 +1,7 @@
 package Main;
 
+import Helper.AppointmentsQuery;
+import Helper.CustomersQuery;
 import Helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -40,11 +43,11 @@ public class Main extends Application {
 //    }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         JDBC.openConnection();
 
-        launch(args);
+//        launch(args);
 
         JDBC.closeConnection();
 
