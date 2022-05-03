@@ -1,9 +1,8 @@
 package Controller;
 
-import Helper.AppointmentsQuery;
-import Helper.CustomersQuery;
+import Helper.*;
 import Model.Appointment;
-import Model.Customer;
+import Model.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +31,7 @@ public class AddAppointment implements Initializable {
     private Button AddApptCancBtn;
 
     @FXML
-    private TextField AddApptContactTxtField;
+    private TextField AddApptLocationTxtField;
 
     @FXML
     private TextField AddApptCustomerIDTxtField;
@@ -44,7 +43,7 @@ public class AddAppointment implements Initializable {
     private TextField AddApptEndDateTimeTxtField;
 
     @FXML
-    private ComboBox<?> AddApptLocationComboBox;
+    private ComboBox<Contact> AddApptContactComboBox;
 
     @FXML
     private Button AddApptSaveBtn;
@@ -82,7 +81,7 @@ public class AddAppointment implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int maxId = 1;
         try {
-            for (Appointment appointment : AppointmentsQuery.populateApptTable()) {
+            for (Appointment appointment : AppointmentsQuery.populateAppointmentTable()) {
                 if (appointment.getAppointmentID() > maxId) {
                     maxId = appointment.getAppointmentID();
                 } else {
@@ -93,5 +92,12 @@ public class AddAppointment implements Initializable {
             throwables.printStackTrace();
         }
         AddApptApptIDTxtField.setText(String.valueOf(maxId + 1));
+
+        try {
+            AddApptContactComboBox.setItems(ContactsQuery.populateContactTable());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }
