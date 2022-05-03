@@ -1,5 +1,10 @@
 package Helper;
 
+import Model.Appointment;
+import Model.Customer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,6 +65,7 @@ public abstract class AppointmentsQuery {
             Timestamp endDateAndTime = rs.getTimestamp("End");
             int customerID = rs.getInt("Customer_ID");
             int userID = rs.getInt("User_ID");
+            int contactID = rs.getInt("Contact_ID");
 //            System.out.print(appointmentIDFK + " | ");
 //            System.out.print(title + " | ");
 //            System.out.print(description + " | ");
@@ -73,7 +79,8 @@ public abstract class AppointmentsQuery {
         }
     }
 
-    public static void selectAll() throws SQLException {
+    public static ObservableList<Appointment> populateAppointmentTable() throws SQLException {
+        ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Appointments";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -87,15 +94,20 @@ public abstract class AppointmentsQuery {
             Timestamp endDateAndTime = rs.getTimestamp("End");
             int customerID = rs.getInt("Customer_ID");
             int userID = rs.getInt("User_ID");
-            System.out.print(appointmentIDFK + " | ");
-            System.out.print(title + " | ");
-            System.out.print(description + " | ");
-            System.out.print(location + " | ");
-            System.out.print(type + " | ");
-            System.out.print(startDateAndTime + " | ");
-            System.out.print(endDateAndTime + " | ");
-            System.out.print(customerID + " | ");
-            System.out.print(userID + "\n");
+            int contactID = rs.getInt("Contact_ID");
+            Appointment A = new Appointment(appointmentIDFK, title, description, location, type, startDateAndTime, endDateAndTime, customerID, userID, contactID);
+            allAppointments.add(A);
         }
+        return allAppointments;
+    }
+
+
+    public static boolean associatedAppointment(int customerID) throws SQLException {
+        String sql = "SELECT * FROM Appointments WHERE Customer_ID = '" + customerID + "'";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        return !rs.next();
+
+
     }
 }

@@ -12,31 +12,6 @@ public class SavedData {
     private static ObservableList<User> allUsers = FXCollections.observableArrayList();
     private static ObservableList<Contact> allContacts = FXCollections.observableArrayList();
 
-    public static ObservableList<Customer> getAllCustomers() {
-
-        try {
-            String sql = "SELECT * FROM client_schedule.customers";
-
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()){
-                int customerId = rs.getInt("Customer_ID");
-                String customerName = rs.getString("Customer_Name");
-                String customerAddress = rs.getString("Address");
-                String customerZip = rs.getString("Postal_Code");
-                String customerPhoneNumber = rs.getString("Phone");
-                int divisionID = rs.getInt("Division_ID");
-                Customer C = new Customer(customerId, customerName, customerAddress, customerZip, customerPhoneNumber, divisionID);
-                allCustomers.add(C);
-            }
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-
-        return allCustomers;
-    }
 
     public static ObservableList<Appointment> getAllAppointments() {
 
@@ -76,8 +51,5 @@ public class SavedData {
         return allContacts;
     }
 
-    public static void addCustomer(Customer customer) {
-        getAllCustomers().add(customer);
-    }
 }
 

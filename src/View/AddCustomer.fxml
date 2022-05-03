@@ -50,8 +50,8 @@
                   <TextField fx:id="AddCustomerAddressTxtField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="AddCustomerPostalCodeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="AddCustomerPhoneNumberTxtField" prefHeight="26.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="AddCustomerStateProvinceComboBox" prefHeight="25.0" prefWidth="289.0" promptText="Select One" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="AddCustomerCountryComboBox" prefHeight="25.0" prefWidth="282.0" promptText="Select One" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="AddCustomerCountryComboBox" onAction="#OnActionUpdateCountryComboBox" prefHeight="25.0" prefWidth="289.0" promptText="Select One" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="AddCustomerStateProvinceComboBox" prefHeight="25.0" prefWidth="282.0" promptText="Select One" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="State/Province" GridPane.rowIndex="6" />
                   <Label text="Country" GridPane.rowIndex="5" />
                </children>

@@ -50,10 +50,10 @@
                   <TextField fx:id="ModCustomerAddressTxtField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="ModCustomerPostalCodeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="ModCustomerPhoneNumberTxtField" prefHeight="26.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="ModCustomerStateProvinceComboBox" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="ModCustomerCountryComboBox" prefHeight="25.0" prefWidth="282.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label text="State/Province" GridPane.rowIndex="5" />
-                  <Label text="Country" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="ModCustomerCountryComboBox" onAction="#OnActionUpdateCountryComboBox" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="ModCustomerStateProvinceComboBox" prefHeight="25.0" prefWidth="282.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label text="State/Province" GridPane.rowIndex="6" />
+                  <Label text="Country" GridPane.rowIndex="5" />
                </children>
             </GridPane>
          </children>

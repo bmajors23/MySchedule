@@ -1,5 +1,9 @@
 package Helper;
 
+import Model.Customer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +11,7 @@ import java.sql.SQLException;
 public abstract class CustomersQuery {
 
     public static int insert(String customerName, String customerAddress, String customerZip, String customerPhoneNumber, int divisionID) throws SQLException {
-        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?)";
+        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setString(1, customerName);
         ps.setString(2, customerAddress);
@@ -18,7 +22,7 @@ public abstract class CustomersQuery {
         return rowsAffected;
     }
 
-    public static int update(String customerName, String customerAddress, String customerZip, String customerPhoneNumber, int divisionID) throws SQLException {
+    public static int update(int customer_ID, String customerName, String customerAddress, String customerZip, String customerPhoneNumber, int divisionID) throws SQLException {
         String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setString(1, customerName);
@@ -26,8 +30,8 @@ public abstract class CustomersQuery {
         ps.setString(3, customerZip);
         ps.setString(4, customerPhoneNumber);
         ps.setInt(5, divisionID);
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected;
+        ps.setInt(6, customer_ID);
+        return ps.executeUpdate();
     }
 
     public static int delete(int customerID) throws SQLException {
@@ -53,7 +57,8 @@ public abstract class CustomersQuery {
         }
     }
 
-    public static void selectAll() throws SQLException {
+    public static ObservableList<Customer> populateCustomerTable() throws SQLException {
+        ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Customers";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -64,7 +69,21 @@ public abstract class CustomersQuery {
             String customerZip = rs.getString("Postal_Code");
             String customerPhoneNumber = rs.getString("Phone");
             int divisionID = rs.getInt("Division_ID");
+            Customer C = new Customer(customerIDFK, customerName, customerAddress, customerZip, customerPhoneNumber, divisionID);
+            allCustomers.add(C);
         }
+        return allCustomers;
+    }
+
+    public static int returnLastCustomerID() throws SQLException {
+        int customerID = 0;
+        String sql = "SELECT Customer_ID FROM CUSTOMERS ORDER BY Customer_ID DESC LIMIT 1";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            customerID = rs.getInt("Customer_ID");
+        }
+        return customerID;
     }
 
 }

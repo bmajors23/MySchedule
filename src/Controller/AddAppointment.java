@@ -1,5 +1,9 @@
 package Controller;
 
+import Helper.AppointmentsQuery;
+import Helper.CustomersQuery;
+import Model.Appointment;
+import Model.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
@@ -66,6 +71,7 @@ public class AddAppointment implements Initializable {
 
     @FXML
     void OnActionSaveAppt(ActionEvent event) throws IOException {
+
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/AppointmentMenu.fxml"));
         stage.setScene(new Scene(scene));
@@ -74,6 +80,18 @@ public class AddAppointment implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        int maxId = 1;
+        try {
+            for (Appointment appointment : AppointmentsQuery.populateApptTable()) {
+                if (appointment.getAppointmentID() > maxId) {
+                    maxId = appointment.getAppointmentID();
+                } else {
+                    continue;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        AddApptApptIDTxtField.setText(String.valueOf(maxId + 1));
     }
 }
