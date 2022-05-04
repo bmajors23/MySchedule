@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
@@ -28,22 +29,27 @@
             <TableColumn fx:id="ApptMenuTblUserIDCol" minWidth="0.0" prefWidth="50.0" text="User ID" />
         </columns>
       </TableView>
-      <Label layoutX="151.0" layoutY="80.0" prefHeight="36.0" prefWidth="166.0" text="Appointments">
+      <Label layoutX="151.0" layoutY="80.0" prefHeight="40.0" prefWidth="219.0" text="Appointments">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <VBox layoutX="52.0" layoutY="168.0" prefHeight="77.0" prefWidth="78.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+      <VBox layoutX="52.0" layoutY="167.0" prefHeight="121.0" prefWidth="78.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <children>
             <Label alignment="TOP_CENTER" text="View by">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <RadioButton fx:id="ApptMenuMonthRdBtn" mnemonicParsing="false" onAction="#OnActionDisplayMonthTblView" prefHeight="18.0" prefWidth="77.0" selected="true" text="Month">
+            <RadioButton fx:id="ApptMenuViewAllRdBtn" contentDisplay="CENTER" mnemonicParsing="false" selected="true" text=" All">
                <toggleGroup>
                   <ToggleGroup fx:id="MonthWeekView" />
                </toggleGroup>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="ApptMenuMonthRdBtn" mnemonicParsing="false" onAction="#OnActionDisplayMonthTblView" prefHeight="18.0" prefWidth="77.0" text="Month" toggleGroup="$MonthWeekView">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
@@ -75,5 +81,6 @@
          </children>
       </HBox>
       <Button fx:id="ApptMenuMmBtn" layoutX="544.0" layoutY="474.0" mnemonicParsing="false" onAction="#OnActionDisplayMainMenu" text="Main Menu" />
+      <DatePicker fx:id="ApptMenuDatePicker" layoutX="852.0" layoutY="88.0" promptText="Select Date to Filter By" />
    </children>
 </AnchorPane>

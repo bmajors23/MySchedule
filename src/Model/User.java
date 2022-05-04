@@ -7,19 +7,11 @@ public class User {
     private int userID;
     private String username;
     private String password;
-    private Time createDate;
-    private String createdBy;
-    private Time lastUpdate;
-    private String updatedBy;
 
     public User(int userID, String username, String password, Time createDate, String createdBy, Time lastUpdate, String updatedBy) {
         this.userID = userID;
         this.username = username;
         this.password = password;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.updatedBy = updatedBy;
     }
 
     public int swapUserNameAndID(String name) {
@@ -66,35 +58,4 @@ public class User {
         this.password = password;
     }
 
-    public Time getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Time createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Time getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Time lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
 }

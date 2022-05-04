@@ -12,8 +12,8 @@ import java.sql.Timestamp;
 
 public abstract class AppointmentsQuery {
 
-    public static int insert(String title, String description, String location, String type, Timestamp startDateAndTime, Timestamp endDateAndTime, int customerID, int userID) throws SQLException {
-        String sql = "INSERT INTO APPOINTMENTS (Title, Description, Location, Type, Start, End, Customer_ID, User_ID) VALUES(?, ?)";
+    public static int insert(String title, String description, String location, String type, Timestamp startDateAndTime, Timestamp endDateAndTime, int customerID, int userID, int contactID) throws SQLException {
+        String sql = "INSERT INTO APPOINTMENTS (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setString(1, title);
         ps.setString(2, description);
@@ -23,12 +23,13 @@ public abstract class AppointmentsQuery {
         ps.setTimestamp(6, endDateAndTime);
         ps.setInt(7, customerID);
         ps.setInt(8, userID);
+        ps.setInt(9, contactID);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
     }
 
-    public static int update(String title, String description, String location, String type, Timestamp startDateAndTime, Timestamp endDateAndTime, int customerID, int userID) throws SQLException {
-        String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ? WHERE Appointment_ID = ?";
+    public static int update(int appointmentID, String title, String description, String location, String type, Timestamp startDateAndTime, Timestamp endDateAndTime, int customerID, int userID, int contactID) throws SQLException {
+        String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, c = ? , Contact_ID = ? WHERE Appointment_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setString(1, title);
         ps.setString(2, description);
@@ -38,8 +39,9 @@ public abstract class AppointmentsQuery {
         ps.setTimestamp(6, endDateAndTime);
         ps.setInt(7, customerID);
         ps.setInt(8, userID);
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected;
+        ps.setInt(9, contactID);
+        ps.setInt(10, appointmentID);
+        return ps.executeUpdate();
     }
 
     public static int delete(int appointmentID) throws SQLException {
@@ -90,8 +92,8 @@ public abstract class AppointmentsQuery {
             String description = rs.getString("Description");
             String location = rs.getString("Location");
             String type = rs.getString("Type");
-            Timestamp startDateAndTime = rs.getTimestamp("Start");
-            Timestamp endDateAndTime = rs.getTimestamp("End");
+            Timestamp startDateAndTime = Helper.toLocalTime(rs.getTimestamp("Start"));
+            Timestamp endDateAndTime = Helper.toLocalTime(rs.getTimestamp("End"));
             int customerID = rs.getInt("Customer_ID");
             int userID = rs.getInt("User_ID");
             int contactID = rs.getInt("Contact_ID");
@@ -107,7 +109,7 @@ public abstract class AppointmentsQuery {
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         return !rs.next();
-
-
     }
+
+    public static ObservableList<Appointment> filterByWeekAndMonth
 }

@@ -52,8 +52,7 @@
                   <TextField fx:id="ModApptApptIDTxtField" editable="false" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" />
                   <TextField fx:id="ModApptDescriptionTxtField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="ModApptEndDateTimeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <TextField fx:id="ModApptContactTxtField" prefHeight="26.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="ModApptLocationComboBox" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="ModApptContactComboBox" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Type" GridPane.rowIndex="5" />
                   <Label text="Start Date &amp; Time" GridPane.rowIndex="6" />
                   <Label text="End Date &amp; Time" GridPane.rowIndex="7" />
@@ -63,6 +62,7 @@
                   <TextField fx:id="ModApptUserIDTxtField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <TextField fx:id="ModApptTypeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <TextField fx:id="ModApptStartDateTimeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="ModApptLocationTxtField" prefHeight="26.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>

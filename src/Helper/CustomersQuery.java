@@ -57,6 +57,18 @@ public abstract class CustomersQuery {
         }
     }
 
+    public static boolean selectExists(int customerID) throws SQLException {
+        String sql = "SELECT * FROM Customers WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setInt(1, customerID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static ObservableList<Customer> populateCustomerTable() throws SQLException {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Customers";

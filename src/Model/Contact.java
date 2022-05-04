@@ -11,6 +11,11 @@ public class Contact {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public int swapContactNameAndID(String name) {
         int contactID = 0;
         for (Contact contact : SavedData.getAllContacts()) {

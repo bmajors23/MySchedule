@@ -51,7 +51,7 @@
                   <TextField fx:id="AddApptTitleTxtField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="AddApptApptIDTxtField" editable="false" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" />
                   <TextField fx:id="AddApptDescriptionTxtField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="AddApptEndDateTimeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="AddApptEndDateTimeTxtField" promptText="EX: 2020-05-01 13:00:00" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <TextField fx:id="AddApptLocationTxtField" prefHeight="26.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Type" GridPane.rowIndex="5" />
                   <Label text="Start Date &amp; Time" GridPane.rowIndex="6" />
@@ -61,7 +61,7 @@
                   <TextField fx:id="AddApptCustomerIDTxtField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <TextField fx:id="AddApptUserIDTxtField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <TextField fx:id="AddApptTypeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="AddApptStartDateTimeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="AddApptStartDateTimeTxtField" promptText="EX: 2020-05-01 12:00:00" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <ComboBox fx:id="AddApptContactComboBox" onAction="#OnActionUpdateContactComboBox" prefHeight="25.0" prefWidth="289.0" promptText="Select one" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>

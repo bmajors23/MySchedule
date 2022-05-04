@@ -1,5 +1,7 @@
 package Controller;
 
+import Helper.AppointmentsQuery;
+import Helper.CustomersQuery;
 import Model.Appointment;
 import Model.SavedData;
 import javafx.event.ActionEvent;
@@ -14,6 +16,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentMenu implements Initializable {
@@ -34,37 +39,37 @@ public class AppointmentMenu implements Initializable {
     private RadioButton ApptMenuMonthRdBtn;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblLocationCol;
+    private TableColumn<Appointment, String> ApptMenuTblLocationCol;
 
     @FXML
     private TableView<Appointment> ApptMenuTbl;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblApptIDCol;
+    private TableColumn<Appointment, Integer> ApptMenuTblApptIDCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblContactCol;
+    private TableColumn<Appointment, Integer> ApptMenuTblContactCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblCustomerIDCol;
+    private TableColumn<Appointment, Integer> ApptMenuTblCustomerIDCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblDescriptionCol;
+    private TableColumn<Appointment, String> ApptMenuTblDescriptionCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblEndDateTimeCol;
+    private TableColumn<Appointment, Timestamp> ApptMenuTblEndDateTimeCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblStartDateTimeCol;
+    private TableColumn<Appointment, Timestamp> ApptMenuTblStartDateTimeCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblTitleCol;
+    private TableColumn<Appointment, String> ApptMenuTblTitleCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblTypeCol;
+    private TableColumn<Appointment, String> ApptMenuTblTypeCol;
 
     @FXML
-    private TableColumn<?, ?> ApptMenuTblUserIDCol;
+    private TableColumn<Appointment, Integer> ApptMenuTblUserIDCol;
 
     @FXML
     private RadioButton ApptMenuWeekRdBtn;
@@ -73,8 +78,35 @@ public class AppointmentMenu implements Initializable {
     private ToggleGroup MonthWeekView;
 
     @FXML
-    void OnActionDeleteAppt(ActionEvent event) {
+    void OnActionDeleteAppt(ActionEvent event) throws SQLException {
+        if (ApptMenuTbl.getSelectionModel().isEmpty()) {
+            dialogBox("Error. No appointment is selected. Please select a appointment to delete.", "Error Message", "Deletion Error!");
+        } else {
+                String titleBar = "Confirmation Message";
+                String headerMessage = "Confirmation Message";
+                String infoMessage = "Are you sure you want to delete?";
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText(infoMessage);
+                alert.setTitle(titleBar);
+                alert.setHeaderText(headerMessage);
+                Optional<ButtonType> choice = alert.showAndWait();
 
+                if (choice.get() == ButtonType.OK) {
+                    AppointmentsQuery.delete(ApptMenuTbl.getSelectionModel().getSelectedItem().getAppointmentID());
+                    ApptMenuTbl.setItems(AppointmentsQuery.populateAppointmentTable());
+                } else {
+
+                }
+            }
+        }
+
+    public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(titleBar);
+        alert.setHeaderText(headerMessage);
+        alert.showAndWait();
     }
 
     @FXML
@@ -94,11 +126,20 @@ public class AppointmentMenu implements Initializable {
     }
 
     @FXML
-    void OnActionDisplayModAppt(ActionEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/ModifyAppointment.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+    void OnActionDisplayModAppt(ActionEvent event) throws IOException, SQLException {
+        if (ApptMenuTbl.getSelectionModel().isEmpty()) {
+            dialogBox("Error. No appointment is selected. Please select an appointment to modify.", "Error Message", "Modify Error!");
+        } else {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/ModifyAppointment.fxml"));
+            loader.load();
+            ModifyAppointment MAController = loader.getController();
+            MAController.sendAppointment(ApptMenuTbl.getSelectionModel().getSelectedItem());
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     @FXML
@@ -114,7 +155,11 @@ public class AppointmentMenu implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ApptMenuTbl.setItems(SavedData.getAllAppointments());
+        try {
+            ApptMenuTbl.setItems(AppointmentsQuery.populateAppointmentTable());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         ApptMenuTblApptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         ApptMenuTblTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
