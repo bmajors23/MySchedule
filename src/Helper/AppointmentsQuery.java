@@ -1,7 +1,6 @@
 package Helper;
 
 import Model.Appointment;
-import Model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -187,6 +186,57 @@ public abstract class AppointmentsQuery {
         } else {
             dialogBox("You have no upcoming appointments.", "Appointment Info", "No appointments");
         }
+    }
+
+    public static ObservableList<Appointment> reportOne(String typeEntered, String month) throws SQLException {
+        String typeToLower = typeEntered.toLowerCase();
+        String monthToLower = month.toLowerCase();
+        int monthNum = 0;
+        if (monthToLower.equals("january")) {
+            monthNum = 1;
+        } else if (monthToLower.equals("february")) {
+            monthNum = 2;
+        } else if (monthToLower.equals("march")) {
+            monthNum = 3;
+        } else if (monthToLower.equals("april")) {
+            monthNum = 4;
+        } else if (monthToLower.equals("may")) {
+            monthNum = 5;
+        } else if (monthToLower.equals("june")) {
+            monthNum = 6;
+        } else if (monthToLower.equals("july")) {
+            monthNum = 7;
+        } else if (monthToLower.equals("august")) {
+            monthNum = 8;
+        } else if (monthToLower.equals("september")) {
+            monthNum = 9;
+        } else if (monthToLower.equals("october")) {
+            monthNum = 10;
+        } else if (monthToLower.equals("november")) {
+            monthNum = 11;
+        } else if (monthToLower.equals("december")) {
+            monthNum = 12;
+        }
+        System.out.println(monthNum);
+        ObservableList<Appointment> allAppointmentsByTypeAndMonth = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Appointments WHERE Lower(Type) = '" + typeToLower + "' AND EXTRACT(MONTH FROM Start) = " + monthNum + "";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int appointmentIDFK = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            Timestamp startDateAndTime = rs.getTimestamp("Start");
+            Timestamp endDateAndTime = rs.getTimestamp("End");
+            int customerID = rs.getInt("Customer_ID");
+            int userID = rs.getInt("User_ID");
+            int contactID = rs.getInt("Contact_ID");
+            Appointment A = new Appointment(appointmentIDFK, title, description, location, type, startDateAndTime, endDateAndTime, customerID, userID, contactID);
+            allAppointmentsByTypeAndMonth.add(A);
+        }
+        return allAppointmentsByTypeAndMonth;
     }
     }
 

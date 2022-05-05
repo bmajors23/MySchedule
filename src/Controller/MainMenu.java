@@ -41,7 +41,7 @@ public class MainMenu implements Initializable {
     @FXML
     void OnActionDisplayReportsMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/CustomerRecordMenu.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/Reports.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
