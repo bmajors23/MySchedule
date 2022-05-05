@@ -27,6 +27,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+/** Login Class, this class allows the user to navigate the login form and allows them to login to the application
+ *
+ */
 public class Login implements Initializable {
 
     Stage stage;
@@ -65,6 +68,11 @@ public class Login implements Initializable {
     public Login() throws IOException {
     }
 
+    /** This method will process the users entered data and determine if they can log in or not. Will send login data to external txt file
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     void OnActionLogin(ActionEvent event) throws IOException, SQLException {
 
@@ -97,6 +105,12 @@ public class Login implements Initializable {
                 outputFile.close();
             }
     }
+
+    /** This method will be called whenever we want to create a dialog box to convey information to the user
+     * @param infoMessage
+     * @param titleBar
+     * @param headerMessage
+     */
         public void dialogBox(String infoMessage, String titleBar, String headerMessage) {
             ResourceBundle rb = ResourceBundle.getBundle("Helper/Nat", Locale.getDefault());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -107,6 +121,11 @@ public class Login implements Initializable {
 
     }
 
+    /** Initialize method. This method will determine the zoneID and will translate text to french if the users computers default language is set to french,
+     * this method also contains a lambda expression which will allow the user to make their password visible.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

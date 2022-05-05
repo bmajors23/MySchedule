@@ -23,6 +23,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** This is the add customer class that will allow the user to add customers to the sql database
+ *
+ */
 public class AddCustomer implements Initializable {
 
     Stage stage;
@@ -55,6 +58,10 @@ public class AddCustomer implements Initializable {
     @FXML
     private ComboBox<FirstLevelDivision> AddCustomerStateProvinceComboBox;
 
+    /** This method will return the user to the Customer Record Menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayCustomerMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -63,6 +70,10 @@ public class AddCustomer implements Initializable {
         stage.show();
     }
 
+    /** This method will save the customer data and return the user to the customer record menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionSaveCustomer(ActionEvent event) throws IOException {
 
@@ -92,6 +103,11 @@ public class AddCustomer implements Initializable {
     }
 
 
+    /** This method will be called whenever we want to create a dialog box to convey information to the user
+     * @param infoMessage
+     * @param titleBar
+     * @param headerMessage
+     */
     public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -101,6 +117,9 @@ public class AddCustomer implements Initializable {
         alert.showAndWait();
     }
 
+    /** This method will update the division combo box based on what the user entered into the country combo box
+     * @param event
+     */
     @FXML
     void OnActionUpdateCountryComboBox(ActionEvent event) {
         if (AddCustomerCountryComboBox.getSelectionModel().getSelectedItem().toString().equals("U.S")) {
@@ -124,6 +143,10 @@ public class AddCustomer implements Initializable {
         }
     }
 
+    /** Intialize method. This will autogenerate customer ID's and will populate the combo boxes with data.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

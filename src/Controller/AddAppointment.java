@@ -22,6 +22,9 @@ import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/** AddAppointment class that will allow user to add appointments to sql server
+ *
+ */
 public class AddAppointment implements Initializable {
 
     Stage stage;
@@ -63,11 +66,10 @@ public class AddAppointment implements Initializable {
     @FXML
     private TextField AddApptUserIDTxtField;
 
-    @FXML
-    void OnActionUpdateContactComboBox(ActionEvent event) {
-
-    }
-
+    /** This method will return the user to the Appointment menu.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayApptMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -76,6 +78,10 @@ public class AddAppointment implements Initializable {
         stage.show();
     }
 
+    /** This function will save the appointment to the database and return user to the Appointment Menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionSaveAppt(ActionEvent event) throws IOException {
 
@@ -113,6 +119,11 @@ public class AddAppointment implements Initializable {
         }
     }
 
+    /** This method will be called whenever we want to create a dialog box to convery information to the user
+     * @param infoMessage
+     * @param titleBar
+     * @param headerMessage
+     */
     public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -122,6 +133,10 @@ public class AddAppointment implements Initializable {
         alert.showAndWait();
     }
 
+    /** Initialize method, this will autogenerate new appointment ID's and set the combobox data.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int maxId = 1;

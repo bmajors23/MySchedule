@@ -20,6 +20,10 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** CustomerRecord Menu. This class allows the user to navigate the customer menu and make changes to customers such
+ * as add, modify, and delete.
+ *
+ */
 public class CustomerRecordMenu implements Initializable {
 
     Stage stage;
@@ -61,6 +65,10 @@ public class CustomerRecordMenu implements Initializable {
     @FXML
     private TableColumn<Customer, Integer> CustomerRecordMenuTblStateCol;
 
+    /** This method will allow the user to delete a customer from the sql database
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void OnActionDeleteCustomer(ActionEvent event) throws SQLException {
         if (CustomerRecordMenuTbl.getSelectionModel().isEmpty()) {
@@ -90,6 +98,10 @@ public class CustomerRecordMenu implements Initializable {
 
     }
 
+    /** This method will navigate the user to the add customer form and allow the user to add to the sql database
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayAddCustomer(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -98,6 +110,10 @@ public class CustomerRecordMenu implements Initializable {
         stage.show();
     }
 
+    /** This method will return the user to the main menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayMainMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -106,6 +122,11 @@ public class CustomerRecordMenu implements Initializable {
         stage.show();
     }
 
+    /** This method will navigate the user to the mod customer form where they can modify existing customer data
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     void OnActionDisplayModCustomer(ActionEvent event) throws IOException, SQLException {
         if (CustomerRecordMenuTbl.getSelectionModel().isEmpty()) {
@@ -124,6 +145,11 @@ public class CustomerRecordMenu implements Initializable {
 
     }
 
+    /** This method will be called whenever we want to create a dialog box to convey information to the user
+     * @param infoMessage
+     * @param titleBar
+     * @param headerMessage
+     */
     public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -133,18 +159,10 @@ public class CustomerRecordMenu implements Initializable {
         alert.showAndWait();
     }
 
-    public static void confirmationBox(String infoMessage, String titleBar, String headerMessage) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText(infoMessage);
-        alert.setTitle(titleBar);
-        alert.setHeaderText(headerMessage);
-        Optional<ButtonType> choice = alert.showAndWait();
-
-        if (choice.get() == ButtonType.OK) {
-
-        }
-    }
-
+    /** Initialize method, this method populates the customer record table with data
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

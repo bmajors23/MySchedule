@@ -62,7 +62,7 @@
                   <TextField fx:id="AddApptUserIDTxtField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <TextField fx:id="AddApptTypeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <TextField fx:id="AddApptStartDateTimeTxtField" promptText="EX: 2020-05-01 12:00:00" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <ComboBox fx:id="AddApptContactComboBox" onAction="#OnActionUpdateContactComboBox" prefHeight="25.0" prefWidth="289.0" promptText="Select one" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="AddApptContactComboBox" prefHeight="25.0" prefWidth="289.0" promptText="Select one" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
          </children>

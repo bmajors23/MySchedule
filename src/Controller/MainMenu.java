@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/** MainMenu class. This class will serve as the central navigation hub for the user
+ *
+ */
 public class MainMenu implements Initializable {
 
     Stage stage;
@@ -30,6 +33,10 @@ public class MainMenu implements Initializable {
     @FXML
     private Button MmLogOutBtn;
 
+    /** This method will navigate the user to the Appointments menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayAppointmentsMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -38,6 +45,10 @@ public class MainMenu implements Initializable {
         stage.show();
     }
 
+    /** This method will navigate the user to the reports menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayReportsMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -46,6 +57,10 @@ public class MainMenu implements Initializable {
         stage.show();
     }
 
+    /** This method will navigate the user to the customer records menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayCustomerRecordsMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -54,6 +69,10 @@ public class MainMenu implements Initializable {
         stage.show();
     }
 
+    /** This method will log the user out of the application
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionLogOut(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -62,6 +81,10 @@ public class MainMenu implements Initializable {
         stage.show();
     }
 
+    /** Initialize method
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

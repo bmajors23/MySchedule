@@ -25,6 +25,10 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** Appointment Menu class, this class will allow the user to navigate the CustomerRecord Menu and perform various functions
+ * such as add, modify, delete, as well as sorting the appointment data.
+ *
+ */
 public class AppointmentMenu implements Initializable {
 
     Stage stage;
@@ -87,6 +91,10 @@ public class AppointmentMenu implements Initializable {
     @FXML
     private ToggleGroup MonthWeekView;
 
+    /** This method will allow the user to delete appointments in the sql database
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void OnActionDeleteAppt(ActionEvent event) throws SQLException {
         if (ApptMenuTbl.getSelectionModel().isEmpty()) {
@@ -110,6 +118,11 @@ public class AppointmentMenu implements Initializable {
             }
         }
 
+    /** This method will be called whenever we want to create a dialog box to convey information to the user.
+     * @param infoMessage
+     * @param titleBar
+     * @param headerMessage
+     */
     public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -121,6 +134,10 @@ public class AppointmentMenu implements Initializable {
     }
 
 
+    /** This method will open up the add appointment form to allow the user to add an appointment to the sql database
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayAddAppt(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -129,6 +146,10 @@ public class AppointmentMenu implements Initializable {
         stage.show();
     }
 
+    /** This method will return the user to the main menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayMainMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -137,6 +158,11 @@ public class AppointmentMenu implements Initializable {
         stage.show();
     }
 
+    /** This method will open up the modify appointment form and allow the user to modify existing appointments
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     void OnActionDisplayModAppt(ActionEvent event) throws IOException, SQLException {
         if (ApptMenuTbl.getSelectionModel().isEmpty()) {
@@ -154,11 +180,19 @@ public class AppointmentMenu implements Initializable {
         }
     }
 
+    /** This method will populate the appointment table with data
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void OnActionPopulateAllAppointments(ActionEvent event) throws SQLException {
         ApptMenuTbl.setItems(AppointmentsQuery.populateAppointmentTable());
     }
 
+    /** This method will populate the table with data depending on what date and toggle button was selected
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void OnActionSelectDate(ActionEvent event) throws SQLException {
         if (MonthWeekView.getSelectedToggle() == ApptMenuViewAllRdBtn) {
@@ -172,6 +206,11 @@ public class AppointmentMenu implements Initializable {
         }
     }
 
+    /** Initialize method. This method will populate the table with data, determine the local date to auto fill the date picker,
+     * and contains two lambda expressions as well that will change the table data depending on the toggle button selected.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
