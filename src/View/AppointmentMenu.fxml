@@ -41,7 +41,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <RadioButton fx:id="ApptMenuViewAllRdBtn" contentDisplay="CENTER" mnemonicParsing="false" selected="true" text=" All">
+            <RadioButton fx:id="ApptMenuViewAllRdBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnActionPopulateAllAppointments" selected="true" text=" All">
                <toggleGroup>
                   <ToggleGroup fx:id="MonthWeekView" />
                </toggleGroup>
@@ -81,6 +81,6 @@
          </children>
       </HBox>
       <Button fx:id="ApptMenuMmBtn" layoutX="544.0" layoutY="474.0" mnemonicParsing="false" onAction="#OnActionDisplayMainMenu" text="Main Menu" />
-      <DatePicker fx:id="ApptMenuDatePicker" layoutX="852.0" layoutY="88.0" promptText="Select Date to Filter By" />
+      <DatePicker fx:id="ApptMenuDatePicker" layoutX="852.0" layoutY="88.0" onAction="#OnActionSelectDate" promptText="Select Date to Filter By" />
    </children>
 </AnchorPane>

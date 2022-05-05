@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -63,6 +64,9 @@ public class AppointmentMenu implements Initializable {
     private TableColumn<Appointment, Timestamp> ApptMenuTblStartDateTimeCol;
 
     @FXML
+    private DatePicker ApptMenuDatePicker;
+
+    @FXML
     private TableColumn<Appointment, String> ApptMenuTblTitleCol;
 
     @FXML
@@ -70,6 +74,9 @@ public class AppointmentMenu implements Initializable {
 
     @FXML
     private TableColumn<Appointment, Integer> ApptMenuTblUserIDCol;
+
+    @FXML
+    private RadioButton ApptMenuViewAllRdBtn;
 
     @FXML
     private RadioButton ApptMenuWeekRdBtn;
@@ -143,13 +150,31 @@ public class AppointmentMenu implements Initializable {
     }
 
     @FXML
-    void OnActionDisplayMonthTblView(ActionEvent event) {
-
+    void OnActionDisplayMonthTblView(ActionEvent event) throws SQLException {
+        ApptMenuTbl.setItems(AppointmentsQuery.filterByMonth(ApptMenuDatePicker.getValue()));
     }
 
     @FXML
-    void OnActionDisplayWeekTblView(ActionEvent event) {
+    void OnActionDisplayWeekTblView(ActionEvent event) throws SQLException {
+        ApptMenuTbl.setItems(AppointmentsQuery.filterByWeek(ApptMenuDatePicker.getValue()));
+    }
 
+    @FXML
+    void OnActionPopulateAllAppointments(ActionEvent event) throws SQLException {
+        ApptMenuTbl.setItems(AppointmentsQuery.populateAppointmentTable());
+    }
+
+    @FXML
+    void OnActionSelectDate(ActionEvent event) throws SQLException {
+        if (MonthWeekView.getSelectedToggle() == ApptMenuViewAllRdBtn) {
+            ApptMenuTbl.setItems(AppointmentsQuery.populateAppointmentTable());
+        } else if (MonthWeekView.getSelectedToggle() == ApptMenuMonthRdBtn) {
+            ApptMenuTbl.setItems(AppointmentsQuery.filterByMonth(ApptMenuDatePicker.getValue()));
+        } else if (MonthWeekView.getSelectedToggle() == ApptMenuWeekRdBtn) {
+            ApptMenuTbl.setItems(AppointmentsQuery.filterByWeek(ApptMenuDatePicker.getValue()));
+        } else {
+
+        }
     }
 
     @Override
@@ -160,6 +185,8 @@ public class AppointmentMenu implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        ApptMenuDatePicker.setValue(ZonedDateTime.now().toLocalDate());
 
         ApptMenuTblApptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         ApptMenuTblTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));

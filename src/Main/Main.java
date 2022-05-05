@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -51,6 +52,9 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
 
         JDBC.openConnection();
+
+//        ZoneId ESTZoneId = ZoneId.of("US/Eastern");
+//        TimeZone.setDefault(TimeZone.getTimeZone(ESTZoneId));
 
         launch(args);
 

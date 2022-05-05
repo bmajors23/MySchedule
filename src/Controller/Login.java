@@ -1,6 +1,8 @@
 package Controller;
 
+import Helper.Helper;
 import Helper.JDBC;
+import Helper.AppointmentsQuery;
 import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,9 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,6 +27,7 @@ public class Login implements Initializable {
 
     Stage stage;
     Parent scene;
+    LocalDateTime loginTime;
 
     @FXML
     private Label LoginCountryLabel;
@@ -57,6 +59,9 @@ public class Login implements Initializable {
 
             if (rs.next()) {
                 if (rs.getString("Password").equals(LoginPasswordTextField.getText())) {
+                    LocalDateTime loginTime = LocalDateTime.now();
+                    Timestamp loginTimestamp = Timestamp.valueOf(loginTime);
+                    AppointmentsQuery.appointmentSoon(loginTimestamp);
                     stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                     scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
                     stage.setScene(new Scene(scene));
