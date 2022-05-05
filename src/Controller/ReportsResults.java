@@ -20,6 +20,9 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
+/** ReportsResults class. This class will allow the user to view the generated reports from the reports form
+ *
+ */
 public class ReportsResults implements Initializable {
 
     Stage stage;
@@ -61,6 +64,10 @@ public class ReportsResults implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> ReportResultsTblUserIDCol;
 
+    /** This method will retrun the user to the reports menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionReturnToReportsMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -69,10 +76,17 @@ public class ReportsResults implements Initializable {
         stage.show();
     }
 
+    /** This method will populate the table view
+     * @param data
+     */
     public void populateTbl(ObservableList<Appointment> data) {
         ReportResultsTbl.setItems(data);
     }
 
+    /** Initialize method. This method will populate the table view
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

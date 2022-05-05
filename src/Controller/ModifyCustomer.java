@@ -25,6 +25,9 @@ import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** Modify Customer class. This class allows the user to navigate the modify customer form and update existing customer data
+ *
+ */
 public class ModifyCustomer implements Initializable {
 
     Stage stage;
@@ -57,6 +60,10 @@ public class ModifyCustomer implements Initializable {
     @FXML
     private ComboBox<FirstLevelDivision> ModCustomerStateProvinceComboBox;
 
+    /** This method will return the user to the customer record menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayCustomerMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -65,6 +72,10 @@ public class ModifyCustomer implements Initializable {
         stage.show();
     }
 
+    /** This method will update the division combo box based on what was entered into the country combo box
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void OnActionUpdateCountryComboBox(ActionEvent event) throws SQLException {
         ModCustomerStateProvinceComboBox.setValue(null);
@@ -89,6 +100,10 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
+    /** This method will save the modified customer data and then return the user to the customer record menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionSaveCustomer(ActionEvent event) throws IOException {
         try {
@@ -115,6 +130,12 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
+    /** This method allows the program to send data from the tableview in the customer record menu and use that data to
+     * populate the fields in the modify customer form
+     * @param customer
+     * @throws IOException
+     * @throws SQLException
+     */
     public void sendCustomer(Customer customer) throws IOException, SQLException {
         ModCustomerCustomerIDTxtField.setText(String.valueOf(customer.getCustomerID()));
         ModCustomerCustomerNameTxtField.setText(String.valueOf(customer.getCustomerName()));
@@ -137,6 +158,11 @@ public class ModifyCustomer implements Initializable {
 
     }
 
+    /** This method will be called whenever we want to convey information to the user
+     * @param infoMessage
+     * @param titleBar
+     * @param headerMessage
+     */
     public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -146,6 +172,10 @@ public class ModifyCustomer implements Initializable {
         alert.showAndWait();
     }
 
+    /** Initialize method. This method populates the combo box
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

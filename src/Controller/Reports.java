@@ -18,6 +18,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** Reports class, this class allows the user to navigate the reports form and generate reports from the sql database
+ *
+ */
 public class Reports implements Initializable {
 
     Stage stage;
@@ -44,6 +47,11 @@ public class Reports implements Initializable {
     @FXML
     private TextField ReportTwoContactTxtField;
 
+    /** This method will generate the first report
+     * @param event
+     * @throws SQLException
+     * @throws IOException
+     */
     @FXML
     void OnActionGenerateReportOne(ActionEvent event) throws SQLException, IOException {
         ObservableList<Appointment> filteredAppointments = AppointmentsQuery.reportOne(ReportOneTypeTxtField.getText(), ReportOneMonthTxtField.getText());
@@ -58,6 +66,11 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /** This method will generate the second report
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     void OnActionGenerateReportTwo(ActionEvent event) throws IOException, SQLException {
         ObservableList<Appointment> filteredAppointments = AppointmentsQuery.reportTwo(ReportTwoContactTxtField.getText());
@@ -72,6 +85,11 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /** This method will generate the third report
+     * @param event
+     * @throws SQLException
+     * @throws IOException
+     */
     @FXML
     void OnActionGenerateReportThree(ActionEvent event) throws SQLException, IOException {
         ObservableList<Appointment> filteredAppointments = AppointmentsQuery.reportThree(ReportThreeCustomerTxtField.getText());
@@ -86,6 +104,10 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /** This method will return the user to the main menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayMainMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -94,6 +116,10 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /** Initialize method
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

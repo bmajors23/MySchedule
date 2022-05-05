@@ -21,6 +21,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
+/** Modify appointment class. This class will allow the user to navigate the mod appointment form and update exisitng appointments
+ *
+ */
 public class ModifyAppointment implements Initializable {
 
     Stage stage;
@@ -62,6 +65,10 @@ public class ModifyAppointment implements Initializable {
     @FXML
     private TextField ModApptUserIDTxtField;
 
+    /** This method will navigate the user back to the appointment menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionDisplayApptMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -70,6 +77,10 @@ public class ModifyAppointment implements Initializable {
         stage.show();
     }
 
+    /** This method will save the modified appointment data and return them to the appointment menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void OnActionSaveAppt(ActionEvent event) throws IOException {
         try {
@@ -101,6 +112,11 @@ public class ModifyAppointment implements Initializable {
         }
     }
 
+    /** This method will be called whenever we want to create a dialog box to convey information to the user
+     * @param infoMessage
+     * @param titleBar
+     * @param headerMessage
+     */
     public static void dialogBox(String infoMessage, String titleBar, String headerMessage)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -110,6 +126,12 @@ public class ModifyAppointment implements Initializable {
         alert.showAndWait();
     }
 
+    /** This method allows the program to transfer data from the tableview in the appointments menu and then use that data
+     * to populate the fields in the modify appointment form
+     * @param appointment
+     * @throws IOException
+     * @throws SQLException
+     */
     public void sendAppointment(Appointment appointment) throws IOException, SQLException {
         ModApptApptIDTxtField.setText(String.valueOf(appointment.getAppointmentID()));
         ModApptTitleTxtField.setText(String.valueOf(appointment.getTitle()));
@@ -126,6 +148,10 @@ public class ModifyAppointment implements Initializable {
 
     }
 
+    /** Initialize method. This method populates the combo box
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
