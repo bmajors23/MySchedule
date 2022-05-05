@@ -217,7 +217,6 @@ public abstract class AppointmentsQuery {
         } else if (monthToLower.equals("december")) {
             monthNum = 12;
         }
-        System.out.println(monthNum);
         ObservableList<Appointment> allAppointmentsByTypeAndMonth = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Appointments WHERE Lower(Type) = '" + typeToLower + "' AND EXTRACT(MONTH FROM Start) = " + monthNum + "";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -237,6 +236,66 @@ public abstract class AppointmentsQuery {
             allAppointmentsByTypeAndMonth.add(A);
         }
         return allAppointmentsByTypeAndMonth;
+    }
+
+    public static ObservableList<Appointment> reportTwo(String contactName) throws SQLException {
+        Integer contactID = 0;
+        String contactNameToLower = contactName.toLowerCase();
+        ObservableList<Appointment> allAppointmentsByContactName = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Contacts WHERE Contact_Name = '" + contactNameToLower + "'";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            contactID = rs.getInt("Contact_ID");
+        }
+        String sql2 = "SELECT * FROM Appointments WHERE Contact_ID = " + contactID;
+        PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
+        ResultSet rs2 = ps2.executeQuery();
+        while (rs2.next()) {
+            int appointmentIDFK = rs2.getInt("Appointment_ID");
+            String title = rs2.getString("Title");
+            String description = rs2.getString("Description");
+            String location = rs2.getString("Location");
+            String type = rs2.getString("Type");
+            Timestamp startDateAndTime = rs2.getTimestamp("Start");
+            Timestamp endDateAndTime = rs2.getTimestamp("End");
+            int customerID = rs2.getInt("Customer_ID");
+            int userID = rs2.getInt("User_ID");
+            int contactIDFK = rs2.getInt("Contact_ID");
+            Appointment A = new Appointment(appointmentIDFK, title, description, location, type, startDateAndTime, endDateAndTime, customerID, userID, contactIDFK);
+            allAppointmentsByContactName.add(A);
+        }
+        return allAppointmentsByContactName;
+    }
+
+    public static ObservableList<Appointment> reportThree(String CustomerName) throws SQLException {
+        Integer customerID = 0;
+        String customerNameToLower = CustomerName.toLowerCase();
+        ObservableList<Appointment> allAppointmentsByCustomerName = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Customers WHERE Customer_Name = '" + customerNameToLower + "'";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            customerID = rs.getInt("Customer_ID");
+        }
+        String sql2 = "SELECT * FROM Appointments WHERE Customer_ID = " + customerID;
+        PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
+        ResultSet rs2 = ps2.executeQuery();
+        while (rs2.next()) {
+            int appointmentID = rs2.getInt("Appointment_ID");
+            String title = rs2.getString("Title");
+            String description = rs2.getString("Description");
+            String location = rs2.getString("Location");
+            String type = rs2.getString("Type");
+            Timestamp startDateAndTime = rs2.getTimestamp("Start");
+            Timestamp endDateAndTime = rs2.getTimestamp("End");
+            int customerIDFK = rs2.getInt("Customer_ID");
+            int userID = rs2.getInt("User_ID");
+            int contactID = rs2.getInt("Contact_ID");
+            Appointment A = new Appointment(appointmentID, title, description, location, type, startDateAndTime, endDateAndTime, customerID, userID, contactID);
+            allAppointmentsByCustomerName.add(A);
+        }
+        return allAppointmentsByCustomerName;
     }
     }
 

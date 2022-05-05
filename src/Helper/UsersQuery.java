@@ -17,4 +17,5 @@ public class UsersQuery {
             return false;
         }
     }
+
 }

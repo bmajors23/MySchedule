@@ -59,13 +59,31 @@ public class Reports implements Initializable {
     }
 
     @FXML
-    void OnActionGenerateReportThree(ActionEvent event) {
-
+    void OnActionGenerateReportTwo(ActionEvent event) throws IOException, SQLException {
+        ObservableList<Appointment> filteredAppointments = AppointmentsQuery.reportTwo(ReportTwoContactTxtField.getText());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/ReportsResults.fxml"));
+        loader.load();
+        ReportsResults RRController = loader.getController();
+        RRController.populateTbl(filteredAppointments);
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
-    void OnActionGenerateReportTwo(ActionEvent event) {
-
+    void OnActionGenerateReportThree(ActionEvent event) throws SQLException, IOException {
+        ObservableList<Appointment> filteredAppointments = AppointmentsQuery.reportThree(ReportThreeCustomerTxtField.getText());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/ReportsResults.fxml"));
+        loader.load();
+        ReportsResults RRController = loader.getController();
+        RRController.populateTbl(filteredAppointments);
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML

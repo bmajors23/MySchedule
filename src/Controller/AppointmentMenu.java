@@ -5,6 +5,7 @@ import Helper.CustomersQuery;
 import Model.Appointment;
 import Model.SavedData;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,8 +13,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -114,7 +117,9 @@ public class AppointmentMenu implements Initializable {
         alert.setTitle(titleBar);
         alert.setHeaderText(headerMessage);
         alert.showAndWait();
+
     }
+
 
     @FXML
     void OnActionDisplayAddAppt(ActionEvent event) throws IOException {
@@ -147,16 +152,6 @@ public class AppointmentMenu implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
         }
-    }
-
-    @FXML
-    void OnActionDisplayMonthTblView(ActionEvent event) throws SQLException {
-        ApptMenuTbl.setItems(AppointmentsQuery.filterByMonth(ApptMenuDatePicker.getValue()));
-    }
-
-    @FXML
-    void OnActionDisplayWeekTblView(ActionEvent event) throws SQLException {
-        ApptMenuTbl.setItems(AppointmentsQuery.filterByWeek(ApptMenuDatePicker.getValue()));
     }
 
     @FXML
@@ -198,6 +193,22 @@ public class AppointmentMenu implements Initializable {
         ApptMenuTblCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         ApptMenuTblUserIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
         ApptMenuTblContactCol.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+
+        ApptMenuMonthRdBtn.setOnAction(actionEvent -> {
+            try {
+                ApptMenuTbl.setItems(AppointmentsQuery.filterByMonth(ApptMenuDatePicker.getValue()));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+
+        ApptMenuWeekRdBtn.setOnAction(actionEvent -> {
+            try {
+                ApptMenuTbl.setItems(AppointmentsQuery.filterByWeek(ApptMenuDatePicker.getValue()));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
 
     }
 }
