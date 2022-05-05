@@ -30,31 +30,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void dialogBox(String infoMessage, String titleBar, String headerMessage) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(infoMessage);
-        alert.setTitle(titleBar);
-        alert.setHeaderText(headerMessage);
-        alert.showAndWait();
-    }
-
-//    public static Customer lookupPart(String contact) {
-//        Customer contactID = null;
-//        for (Customer contact : allCustomers) {
-//            if (contactID == customer.getId()) {
-//                contactID = customer.getC;
-//            }
-//        }
-//        return lookedUpPart;
-//    }
-
 
     public static void main(String[] args) throws SQLException {
 
         JDBC.openConnection();
-
-//        ZoneId ESTZoneId = ZoneId.of("US/Eastern");
-//        TimeZone.setDefault(TimeZone.getTimeZone(ESTZoneId));
 
         launch(args);
 

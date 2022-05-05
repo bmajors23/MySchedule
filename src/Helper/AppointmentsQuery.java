@@ -4,11 +4,20 @@ import Model.Appointment;
 import Model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.time.LocalDate;
 
 public abstract class AppointmentsQuery {
+
+    public static void dialogBox(String infoMessage, String titleBar, String headerMessage) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(titleBar);
+        alert.setHeaderText(headerMessage);
+        alert.showAndWait();
+    }
 
     public static int insert(String title, String description, String location, String type, Timestamp startDateAndTime, Timestamp endDateAndTime, int customerID, int userID, int contactID) throws SQLException {
         String sql = "INSERT INTO APPOINTMENTS (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -168,16 +177,16 @@ public abstract class AppointmentsQuery {
     }
 
     public static void appointmentSoon(Timestamp start) throws SQLException {
-        Timestamp UTCStart =  Helper.toUTC(start);
+        Timestamp UTCStart = Helper.toUTC(start);
         String sql = "SELECT * FROM Appointments WHERE Start BETWEEN '" + UTCStart + "' AND '" + UTCStart.toLocalDateTime().plusMinutes(15) + "'";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         System.out.println(rs);
         if (rs.next()) {
-
+            dialogBox("You have an appointment soon!", "Appointment Alert!", "Appointment ID: " + rs.getInt("Appointment_ID") + "\nDate and Time: " + rs.getTimestamp("Start"));
         } else {
-
+            dialogBox("You have no upcoming appointments.", "Appointment Info", "No appointments");
         }
     }
+    }
 
-}

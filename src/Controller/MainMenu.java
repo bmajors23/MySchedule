@@ -25,12 +25,23 @@ public class MainMenu implements Initializable {
     private Button MmCustomerRecordsBtn;
 
     @FXML
+    private Button MmReportsBtn;
+
+    @FXML
     private Button MmLogOutBtn;
 
     @FXML
     void OnActionDisplayAppointmentsMenu(ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/View/AppointmentMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+    @FXML
+    void OnActionDisplayReportsMenu(ActionEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/CustomerRecordMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
