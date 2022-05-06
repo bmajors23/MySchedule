@@ -10,9 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** This class serves as a query for the countries in the sql database
+ *
+ */
 public abstract class CountriesQuery {
 
 
+    /** This method selects a specific country based on the countryID
+     * @param countryID
+     * @throws SQLException
+     */
     public static void select(int countryID) throws SQLException {
         String sql = "SELECT * FROM Countries WHERE Country_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -24,6 +31,10 @@ public abstract class CountriesQuery {
         }
     }
 
+    /**
+     * @return This method populates the country data
+     * @throws SQLException
+     */
     public static ObservableList<Country> populateCountryTable() throws SQLException {
         ObservableList<Country> allCountries = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Countries";

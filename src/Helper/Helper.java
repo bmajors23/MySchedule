@@ -5,9 +5,16 @@ import java.sql.Timestamp;
 import java.time.*;
 import java.util.TimeZone;
 
+/** This helper class contains functions that aided with various aspects of the project
+ *
+ */
 public class Helper {
 
 
+    /** This method takes entered time and translates it into UTC time
+     * @param enteredTime
+     * @return
+     */
     public static Timestamp toUTC(Timestamp enteredTime) {
         ZoneId LocalZone = ZoneId.systemDefault();
         LocalDate LocalDate = enteredTime.toLocalDateTime().toLocalDate();
@@ -25,6 +32,10 @@ public class Helper {
 
     }
 
+    /** This method translates the time entered into eastern time
+     * @param TimeEntered
+     * @return
+     */
     public static Timestamp toEasternTime(Timestamp TimeEntered) {
         ZoneId LocalZone = ZoneId.systemDefault();
         LocalDate LocalDate = TimeEntered.toLocalDateTime().toLocalDate();

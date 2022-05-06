@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLData;
 import java.sql.SQLException;
 
+/** This class allows the gui application to connect to the sql databse
+ *
+ */
 public abstract class JDBC {
 
     private static final String protocol = "jdbc";
@@ -17,6 +20,9 @@ public abstract class JDBC {
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
+    /** This method forms the connection with the database
+     *
+     */
     public static void openConnection()
     {
         try {
@@ -30,10 +36,16 @@ public abstract class JDBC {
         }
     }
 
+    /** This method retrieves the connection whenever an sql statement is needing to be performed
+     * @return
+     */
     public static Connection getConnection() {
         return connection;
     }
 
+    /** This method closes the connection the the database
+     *
+     */
     public static void closeConnection() {
         try {
             connection.close();

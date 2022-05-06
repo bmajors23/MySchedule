@@ -9,8 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** This class serves as a query to perform sql statements on contacts
+ *
+ */
 public abstract class ContactsQuery {
 
+    /** This method populates the contact table
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<Contact> populateContactTable() throws SQLException {
         ObservableList<Contact> allContacts = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Contacts";
@@ -26,6 +33,11 @@ public abstract class ContactsQuery {
         return allContacts;
     }
 
+    /** This method locates a specific contact based on the contactID
+     * @param contactID
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<Contact> lookupContact(int contactID) throws SQLException {
         ObservableList<Contact> selectedContact = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Contacts WHERE Contact_ID = ?";

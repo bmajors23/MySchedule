@@ -8,8 +8,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** This method serves as a query for the customers in the sql database
+ *
+ */
 public abstract class CustomersQuery {
 
+    /** This method inserts a new customer into the sql database
+     * @param customerName
+     * @param customerAddress
+     * @param customerZip
+     * @param customerPhoneNumber
+     * @param divisionID
+     * @return
+     * @throws SQLException
+     */
     public static int insert(String customerName, String customerAddress, String customerZip, String customerPhoneNumber, int divisionID) throws SQLException {
         String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -22,6 +34,16 @@ public abstract class CustomersQuery {
         return rowsAffected;
     }
 
+    /** This method updates an existing customer in the sql database
+     * @param customer_ID
+     * @param customerName
+     * @param customerAddress
+     * @param customerZip
+     * @param customerPhoneNumber
+     * @param divisionID
+     * @return
+     * @throws SQLException
+     */
     public static int update(int customer_ID, String customerName, String customerAddress, String customerZip, String customerPhoneNumber, int divisionID) throws SQLException {
         String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -34,6 +56,11 @@ public abstract class CustomersQuery {
         return ps.executeUpdate();
     }
 
+    /** This method deletes a customer from the sql database
+     * @param customerID
+     * @return
+     * @throws SQLException
+     */
     public static int delete(int customerID) throws SQLException {
         String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -42,6 +69,10 @@ public abstract class CustomersQuery {
         return rowsAffected;
     }
 
+    /** This method selects a specific customer based on the customerID provided
+     * @param customerID
+     * @throws SQLException
+     */
     public static void select(int customerID) throws SQLException {
         String sql = "SELECT * FROM Customers WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -57,6 +88,11 @@ public abstract class CustomersQuery {
         }
     }
 
+    /** This method determines if a customer exists based on a customerID provided.
+     * @param customerID
+     * @return
+     * @throws SQLException
+     */
     public static boolean selectExists(int customerID) throws SQLException {
         String sql = "SELECT * FROM Customers WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -69,6 +105,10 @@ public abstract class CustomersQuery {
         }
     }
 
+    /** This method populates the customer records table with data
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<Customer> populateCustomerTable() throws SQLException {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Customers";
@@ -87,15 +127,15 @@ public abstract class CustomersQuery {
         return allCustomers;
     }
 
-    public static int returnLastCustomerID() throws SQLException {
-        int customerID = 0;
-        String sql = "SELECT Customer_ID FROM CUSTOMERS ORDER BY Customer_ID DESC LIMIT 1";
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            customerID = rs.getInt("Customer_ID");
-        }
-        return customerID;
-    }
+//    public static int returnLastCustomerID() throws SQLException {
+//        int customerID = 0;
+//        String sql = "SELECT Customer_ID FROM CUSTOMERS ORDER BY Customer_ID DESC LIMIT 1";
+//        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+//        ResultSet rs = ps.executeQuery();
+//        while (rs.next()) {
+//            customerID = rs.getInt("Customer_ID");
+//        }
+//        return customerID;
+//    }
 
 }

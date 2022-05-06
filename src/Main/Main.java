@@ -20,8 +20,15 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/** The main class
+ *
+ */
 public class Main extends Application {
 
+    /** Start method, this launches the gui application
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
@@ -31,6 +38,10 @@ public class Main extends Application {
     }
 
 
+    /** The main method. Opens the connection and closes the connection to the database and launches the gui application
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
 
         JDBC.openConnection();

@@ -10,9 +10,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** This class serves as query to perform sql statements on the sql database
+ *
+ */
 public abstract class DivisionsQuery {
 
 
+    /** This method selects a specific division based on the country ID provided
+     * @param countryID
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<FirstLevelDivision> select(int countryID) throws SQLException {
         ObservableList<FirstLevelDivision> selectedDivisions = FXCollections.observableArrayList();
         String sql = "SELECT * FROM first_level_divisions WHERE Country_ID = ?";
@@ -29,6 +37,10 @@ public abstract class DivisionsQuery {
         return selectedDivisions;
     }
 
+    /** This method populates the division table with data
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<FirstLevelDivision> populateDivisionTable() throws SQLException {
         ObservableList<FirstLevelDivision> allDivisions = FXCollections.observableArrayList();
         String sql = "SELECT * FROM first_level_divisions";
@@ -45,6 +57,11 @@ public abstract class DivisionsQuery {
         return allDivisions;
     }
 
+    /** This method looks up a specific division based on a division id provided
+     * @param divisionID
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<FirstLevelDivision> lookupDivision(int divisionID) throws SQLException {
         ObservableList<FirstLevelDivision> selectedDivision = FXCollections.observableArrayList();
         String sql = "SELECT * FROM first_level_divisions WHERE Division_ID = ?";
