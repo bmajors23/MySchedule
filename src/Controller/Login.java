@@ -22,10 +22,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.time.format.TextStyle;
+import java.util.*;
 
 /** Login Class, this class allows the user to navigate the login form and allows them to login to the application
  *
@@ -136,7 +136,7 @@ public class Login implements Initializable {
             LoginUsernameLabel.setText(rb.getString("Username"));
             LoginPasswordLabel.setText(rb.getString("Password"));
             LoginLoginLabel.setText(rb.getString("Login"));
-            LoginCountryLabel.setText("ZoneID: "+ zoneID);
+            LoginCountryLabel.setText("ZoneID: " + zoneID + " " + TimeZone.getDefault().getDisplayName());
 
             LoginShowPassword.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
                 if (LoginPasswordTextField.getText().isEmpty()) {

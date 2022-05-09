@@ -45,7 +45,6 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
 
         JDBC.openConnection();
-
         launch(args);
 
         JDBC.closeConnection();
