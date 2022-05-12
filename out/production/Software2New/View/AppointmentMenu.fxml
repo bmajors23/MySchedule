@@ -54,7 +54,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </RadioButton>
-            <RadioButton fx:id="ApptMenuWeekRdBtn" mnemonicParsing="false" onAction="#OnActionDisplayWeekTblView" prefHeight="18.0" prefWidth="74.0" text="Week" toggleGroup="$MonthWeekView">
+            <RadioButton fx:id="ApptMenuWeekRdBtn" mnemonicParsing="false" prefHeight="18.0" prefWidth="74.0" text="Week" toggleGroup="$MonthWeekView">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>

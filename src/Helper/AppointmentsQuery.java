@@ -1,6 +1,7 @@
 package Helper;
 
 import Model.Appointment;
+import Model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -118,15 +119,6 @@ public abstract class AppointmentsQuery {
             int customerID = rs.getInt("Customer_ID");
             int userID = rs.getInt("User_ID");
             int contactID = rs.getInt("Contact_ID");
-//            System.out.print(appointmentIDFK + " | ");
-//            System.out.print(title + " | ");
-//            System.out.print(description + " | ");
-//            System.out.print(location + " | ");
-//            System.out.print(type + " | ");
-//            System.out.print(startDateAndTime + " | ");
-//            System.out.print(endDateAndTime + " | ");
-//            System.out.print(customerID + " | ");
-//            System.out.print(userID + "\n");
 
         }
     }
@@ -205,7 +197,6 @@ public abstract class AppointmentsQuery {
     public static ObservableList<Appointment> filterByWeek(LocalDate date) throws SQLException {
         ObservableList<Appointment> allAppointmentsByWeek = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Appointments WHERE Start BETWEEN '" + date + "' and '" + date.plusWeeks(1) + "'";
-        System.out.println(sql);
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -231,10 +222,10 @@ public abstract class AppointmentsQuery {
      * @return
      * @throws SQLException
      */
-    public static boolean overlappingAppointment(Timestamp start, Timestamp end) throws SQLException {
+    public static boolean overlappingAppointment(int CustomerID, Timestamp start, Timestamp end) throws SQLException {
         Timestamp UTCStart =  Helper.toUTC(start);
         Timestamp UTCEnd = Helper.toUTC(end);
-        String sql = "SELECT * FROM Appointments WHERE (Start BETWEEN '" + UTCStart + "' AND '" + UTCEnd + "') OR (End BETWEEN '" + UTCStart + "' AND '" + UTCEnd + "')";
+        String sql = "SELECT * FROM Appointments WHERE Customer_ID = '" + CustomerID + "' AND ((Start BETWEEN '" + UTCStart + "' AND '" + UTCEnd + "') OR (End BETWEEN '" + UTCStart + "' AND '" + UTCEnd + "'))";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -253,7 +244,6 @@ public abstract class AppointmentsQuery {
         String sql = "SELECT * FROM Appointments WHERE Start BETWEEN '" + UTCStart + "' AND '" + UTCStart.toLocalDateTime().plusMinutes(15) + "'";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
-        System.out.println(rs);
         if (rs.next()) {
             dialogBox("You have an appointment soon!", "Appointment Alert!", "Appointment ID: " + rs.getInt("Appointment_ID") + "\nDate and Time: " + rs.getTimestamp("Start"));
         } else {

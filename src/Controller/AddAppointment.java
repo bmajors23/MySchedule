@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -97,12 +98,12 @@ public class AddAppointment implements Initializable {
             int contactID = AddApptContactComboBox.getSelectionModel().getSelectedItem().getID();
             if (title.isEmpty() || description.isEmpty() || location.isEmpty() || type.isEmpty()) {
                 dialogBox("Please complete the form and give input for all data.", "Error Message", "Input Error!");
-            } else if (Helper.toEasternTime(startDateAndTime).toLocalDateTime().toLocalTime().isBefore(LocalTime.parse("08:00:00")) || Helper.toEasternTime(startDateAndTime).toLocalDateTime().toLocalTime().isAfter(LocalTime.parse("22:00:00"))){
-                dialogBox("Please enter a time between 08:00 AM EST and 10:00 PM EST.", "Error Message", "Out of Office Hours");
+            } else if (Helper.toEasternTime(startDateAndTime).toLocalDateTime().toLocalTime().isBefore(LocalTime.parse("08:00:00")) || Helper.toEasternTime(startDateAndTime).toLocalDateTime().toLocalTime().isAfter(LocalTime.parse("22:00:00")) || endDateAndTime.toLocalDateTime().toLocalDate().isAfter(startDateAndTime.toLocalDateTime().toLocalDate())) {
+                dialogBox("This time is not within office hours. (Office hours: 08:00 AM EST to 10:00 PM EST.", "Error Message", "Out of Office Hours");
             } else if (startDateAndTime.after(endDateAndTime)){
                dialogBox("Start time is after end time.", "Error Message", "Scheduling Error");
-            } else if (AppointmentsQuery.overlappingAppointment(startDateAndTime, endDateAndTime)){
-                dialogBox("There is already an appointment scheduled with this time.", "Error Message", "Scheduling Error");
+            } else if (AppointmentsQuery.overlappingAppointment(customerID, startDateAndTime, endDateAndTime)){
+                dialogBox("There is already an appointment scheduled at this time for this Customer.", "Error Message", "Scheduling Error");
             } else if (CustomersQuery.selectExists(customerID) && UsersQuery.selectExists(userID)) {
                 AppointmentsQuery.insert(title, description, location, type, startDateAndTime, endDateAndTime, customerID, userID, contactID);
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();

@@ -48,9 +48,6 @@ public class CustomerRecordMenu implements Initializable {
     private TableColumn<Customer, String> CustomerRecordMenuTblAddressCol;
 
     @FXML
-    private TableColumn<Customer, Integer> CustomerRecordMenuTblCountryCol;
-
-    @FXML
     private TableColumn<Customer, Integer> CustomerRecordMenuTblCustomerIDCol;
 
     @FXML

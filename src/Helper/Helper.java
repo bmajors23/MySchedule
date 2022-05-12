@@ -27,7 +27,6 @@ public class Helper {
         ZonedDateTime gmtToLocalZDT = UTCtoGMTInstant.atZone(UTCZoneId);
 
         Timestamp returnedTimestamp = Timestamp.valueOf(UTCtoUTCZDT.toLocalDateTime());
-        System.out.println(returnedTimestamp);
         return returnedTimestamp;
 
     }
@@ -48,7 +47,6 @@ public class Helper {
         ZonedDateTime gmtToLocalZDT = UTCtoGMTInstant.atZone(ESTZoneId);
 
         Timestamp returnedTimestamp = Timestamp.valueOf(UTCtoESTZDT.toLocalDateTime());
-        System.out.println(returnedTimestamp);
         return returnedTimestamp;
 
     }

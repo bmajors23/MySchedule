@@ -37,7 +37,6 @@ public class Login implements Initializable {
     LocalDateTime loginTime;
     String password;
     String filename = "C:/Users/LabUser/IdeaProjects/Software2/login_activity.txt";
-    FileWriter outputFile = new FileWriter(filename, true);
 
 
 
@@ -79,6 +78,7 @@ public class Login implements Initializable {
         String sql = "SELECT * FROM client_schedule.users where User_Name like '" + LoginUsernameTextField.getText() + "'";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
+        FileWriter outputFile = new FileWriter(filename, true);
 
             if (rs.next()) {
                 if (rs.getString("Password").equals(LoginPasswordTextField.getText())) {
@@ -92,7 +92,6 @@ public class Login implements Initializable {
 
                     outputFile.append("User ").append(rs.getString("User_Name")).append(" successfully logged in at ").append(String.valueOf(LocalDateTime.now())).append("\n");
                     outputFile.close();
-
 
                 } else {
                     dialogBox("InvalidPasswordMessage","InvalidPasswordTitle", "InvalidPasswordHeader");
