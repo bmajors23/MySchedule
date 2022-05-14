@@ -36,7 +36,7 @@ public class Login implements Initializable {
     Parent scene;
     LocalDateTime loginTime;
     String password;
-    String filename = "C:/Users/LabUser/IdeaProjects/Software2/login_activity.txt";
+    String filename = "login_activity.txt";
 
 
 
