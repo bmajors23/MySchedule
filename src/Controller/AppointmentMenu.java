@@ -110,6 +110,7 @@ public class AppointmentMenu implements Initializable {
                 Optional<ButtonType> choice = alert.showAndWait();
 
                 if (choice.get() == ButtonType.OK) {
+                    dialogBox("Appointment ID Deleted: " + ApptMenuTbl.getSelectionModel().getSelectedItem().getAppointmentID() + ".\nAppointment Type Deleted: " + ApptMenuTbl.getSelectionModel().getSelectedItem().getType() + ".", "Delete Message", "Delete Message");
                     AppointmentsQuery.delete(ApptMenuTbl.getSelectionModel().getSelectedItem().getAppointmentID());
                     ApptMenuTbl.setItems(AppointmentsQuery.populateAppointmentTable());
                 } else {
