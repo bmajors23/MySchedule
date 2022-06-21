@@ -1,6 +1,6 @@
 // Title and purpose of application
 
-Software 2: MySchedule - This application is a GUI scheduling software where you can manage
+MySchedule - This application is a GUI scheduling software where you can manage
 appointments for a variety of customers.
 
 //Author, Contact Information, Application Version, and Date
