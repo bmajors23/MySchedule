@@ -5,7 +5,7 @@ appointments for a variety of customers.
 
 //Author, Contact Information, Application Version, and Date
 
-Nicholas Bryce Majors, nmajo16@wgu.edu, Application Version #11, 2020-05-05
+Nicholas Bryce Majors, bmajors23@gmail.com, Application Version #11, 2020-05-05
 
 //IDE including version number
 
