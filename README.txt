@@ -1,22 +1,12 @@
-// Title and purpose of application
 
 MySchedule - This application is a GUI scheduling software where you can manage
 appointments for a variety of customers.
 
-//Author, Contact Information, Application Version, and Date
-
 Nicholas Bryce Majors, bmajors23@gmail.com, Application Version #11, 2020-05-05
-
-//IDE including version number
 
 Intellij Community Edition 2021.1.3
 
-//Full JDK of version 11 used
-
 JDK 11.0.11
-
-//JavaFX version compatible with JDK 11
-
 javafx-sdk-17.0.1
 
 //Directions for how to run the program
@@ -45,11 +35,7 @@ javafx-sdk-17.0.1
         you are looking for and a tableview will be created to view the filtered results.
 7. If you choose log out, you will return to the original login form.
 
-//A description of the additional report of your choice you ran in part A.3.f
-
 For my third report, I wrote code to allow the user to search for appointments based on customer name
-
-//The MySQL Connector driver version number, including the update number
 
 mysql-connector-java-8.0.26
 
